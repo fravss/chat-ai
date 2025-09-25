@@ -1,0 +1,13 @@
+[project]
+name = "chat-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1.2",
+    "langchain-mongodb>=0.7.0",
+    "langchain[google-genai]>=0.3.27",
+    "pymongo[srv]>=4.7",
+    "python-dotenv>=1.1.1",
+]
