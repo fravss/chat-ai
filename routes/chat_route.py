@@ -1,8 +1,10 @@
-from flask import request, jsonify
+from flask import Blueprint, request
 from contollers.chat_controller import chat_controller
-from main import app
 
-@app.route("/", methods=["POST"])
+chat_bp = Blueprint('chat', __name__)
+
+
+@chat_bp.route("/", methods=["POST"])
 def chat():
     data = request.get_json()
     return chat_controller(data)

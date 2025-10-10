@@ -1,18 +1,16 @@
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI
+from getpass import getpass
 from dotenv import load_dotenv
+from langchain.chat_models import init_chat_model
 
+load_dotenv()
 
+if not os.environ.get("GOOGLE_API_KEY"):
+    os.environ["GOOGLE_API_KEY"] = getpass("Enter API key for Google Gemini: ")
 
-load_dotenv() 
-api_key = os.getenv("GOOGLE_API_KEY")
+llm = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
 
-model = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",  
-        google_api_key=api_key,
-    )
-
-def chat_service(message):
-    response = model.invoke(message)
+def chat_service(message: str) -> str:
+    response = llm.invoke(message)
 
     return response.content.strip()
