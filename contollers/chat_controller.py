@@ -3,6 +3,7 @@ from services.chat_service import chat_service
 
 
 def chat_controller(data):
+    print("controller")
     message = data["message"]
 
     response = chat_service(message)

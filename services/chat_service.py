@@ -3,19 +3,22 @@ from getpass import getpass
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 
-from graphs.build import getGraph
+from langgraph.graph import START, StateGraph
 
-load_dotenv()
+from graphs.state import State
+from services.rag_service import generate, retrieve
 
-if not os.environ.get("GOOGLE_API_KEY"):
-    os.environ["GOOGLE_API_KEY"] = getpass("Enter API key for Google Gemini: ")
-
-llm = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
-
-graph = getGraph()
 
 def chat_service(message: str) -> str:
-    response = graph.invoke({"question": "What is Task Decomposition?"})
-    print(response["answer"])
 
-    return response.content.strip()
+    try:
+        graph_builder = StateGraph(State).add_sequence([retrieve, generate])
+        graph_builder.add_edge(START, "retrieve")
+        rag = graph_builder.compile()
+
+        response = rag.invoke({"question": message})
+
+        return response["answer"]
+    except Exception as e:
+        print(f"Ocorreu um erro: {e}")
+ 

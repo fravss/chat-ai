@@ -5,9 +5,13 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "bs4>=0.0.2",
     "flask>=3.1.2",
+    "flask-cors>=6.0.1",
+    "langchain-community>=0.3.31",
     "langchain-mongodb>=0.7.0",
     "langchain[google-genai]>=0.3.27",
     "pymongo[srv]>=4.7",
+    "pypdf>=6.1.2",
     "python-dotenv>=1.1.1",
 ]
