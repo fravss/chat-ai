@@ -46,8 +46,9 @@ vector_store = MongoDBAtlasVectorSearch(
 
 
 def retrieve(state: State):
-    print("retrieve")
+
     retrieved_docs = vector_store.similarity_search(state["question"])
+    print("O QUE TEMOS AQUI?: ", retrieved_docs)
     return {"context": retrieved_docs}
 
 
