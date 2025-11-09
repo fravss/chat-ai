@@ -22,3 +22,6 @@ def chat_service(message: str) -> str:
     except Exception as e:
         print(f"Ocorreu um erro: {e}")
  
+
+
+ 
