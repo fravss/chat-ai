@@ -9,3 +9,7 @@ def chat():
     print("route")
     data = request.get_json()
     return chat_controller(data)
+
+@chat_bp.route("/teste", methods=["GET"])
+def test(): 
+    return "OLÁ"

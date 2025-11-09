@@ -48,13 +48,19 @@ vector_store = MongoDBAtlasVectorSearch(
 def retrieve(state: State):
 
     retrieved_docs = vector_store.similarity_search(state["question"])
-    print("O QUE TEMOS AQUI?: ", retrieved_docs)
     return {"context": retrieved_docs}
 
 
 def generate(state: State):
     print("generate")
     docs_content = "\n\n".join(doc.page_content for doc in state["context"])
-    messages = prompt.invoke({"question": state["question"], "context": docs_content})
+
+    messages = prompt.invoke({
+                             "question": state["question"],
+                              "context": docs_content
+                             })
+
+
+
     response = llm.invoke(messages)
     return {"answer": response.content}
