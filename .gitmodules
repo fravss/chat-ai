@@ -1,0 +1,9 @@
+[submodule "chatbot-frontend"]
+	path = chatbot-frontend
+	url = https://github.com/fravss/tcc-front.git
+[submodule "auth-backend"]
+	path = auth-backend
+	url = https://github.com/fravss/auth-ai.git
+[submodule "main-app-frontend"]
+	path = main-app-frontend
+	url = https://github.com/fravss/front-main-app.git
