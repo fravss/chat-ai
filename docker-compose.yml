@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   mysql:
     image: mysql
@@ -10,6 +12,8 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - rede-ana
 
   app:
     build: ./auth-backend
@@ -22,19 +26,36 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/authchat
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 123
+    networks:
+      - rede-ana
 
   frontend:
     build: ./main-app-frontend
+    container_name: main-frontend
     ports:
       - "4200:4200"
+    networks:
+      - rede-ana
+
   chat-ai:
     build: ./ai-chatbot-backend
+    container_name: backend-chat
     ports:
       - "5000:5000"
+    networks:
+      - rede-ana
+
   front-next:
     build: ./chatbot-frontend
+    container_name: frontend-next
     ports:
       - "3000:3000"
+    networks:
+      - rede-ana
 
 volumes:
   mysql_data:
+
+networks:
+  rede-ana:
+    driver: bridge
