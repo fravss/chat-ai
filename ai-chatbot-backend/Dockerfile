@@ -11,4 +11,5 @@ RUN uv sync --locked
 
 EXPOSE 5000
 
+
 CMD ["uv", "run", "python", "main.py"]
